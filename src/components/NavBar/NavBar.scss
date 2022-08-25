@@ -4,4 +4,9 @@
   display: flex;
   justify-content: space-between;
   color: white;
+  .title {
+    font-size: 29px;
+    display: flex;
+    align-items: center;
+  }
 }
