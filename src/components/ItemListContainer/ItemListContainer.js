@@ -1,12 +1,12 @@
 import "./ItemListContainer.scss"
+import ItemCount from "../ItemCount/ItemCount.js"
+
 
 const ItemListContainer = ({nombre="Papas", precio="1", stock="100"}) => {
     
     return (
-        <section className="productos">
-            <h3>{ nombre }</h3>
-            <p> { precio }</p>
-            <p> { stock }</p>
+        <section>
+            <ItemCount producto={nombre} limite={stock} precio={precio}/>
         </section>
     )
 }
