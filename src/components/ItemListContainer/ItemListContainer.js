@@ -1,12 +1,40 @@
 import "./ItemListContainer.scss"
-import ItemCount from "../ItemCount/ItemCount.js"
+import { useState } from 'react'
+import { useEffect } from "react"
+import { articulos } from "../../data/data.js"
+import ItemList from "../ItemList/ItemList"
 
 
-const ItemListContainer = ({nombre="Papas", precio="1", stock="100"}) => {
+const solicitarDatos = () => {
+    return new Promise ((resolve,reject) => {
+        setTimeout( () => {
+            resolve(articulos)
+        }, 3000)
+    })
+}
+
+const ItemListContainer = () => {
     
+    const [product, setProduct ] = useState([])
+
+    
+
+    useEffect(() => {
+            solicitarDatos()
+            .then((res) => {
+                setProduct(res)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+            .finally( () => {
+                console.log("fin del proceso")
+            })
+    })
+
     return (
         <section>
-            <ItemCount producto={nombre} limite={stock} precio={precio}/>
+            <ItemList productos={product}/>
         </section>
     )
 }
