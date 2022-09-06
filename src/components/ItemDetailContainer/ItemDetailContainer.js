@@ -2,10 +2,9 @@ import { useEffect,useState } from "react"
 import ItemDetail from "../ItemDetail/ItemDetail"
 
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({id}) => {
     
     const [laptop, setLaptop] = useState(null)
-    
 
     useEffect(() => {
         fetch('https://api.mercadolibre.com/sites/MLA/search?q=laptop&sort=sortId')
@@ -13,7 +12,7 @@ const ItemDetailContainer = () => {
             return response.json()
         })
         .then((data) => {
-            setLaptop(data.results[1])
+            setLaptop(data.results)
         })
     }, [])
     
@@ -24,7 +23,7 @@ const ItemDetailContainer = () => {
                 laptop
                 ?
                 <>
-                    <ItemDetail title={laptop.title} price={laptop.price} img={laptop.thumbnail} alt={laptop.thumbnail.id}/>
+                    <ItemDetail prop={laptop[id]}/>
                 </>
                 : null
 
