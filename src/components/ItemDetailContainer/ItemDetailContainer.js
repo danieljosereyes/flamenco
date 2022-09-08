@@ -1,20 +1,24 @@
 import { useEffect,useState } from "react"
+import { useParams } from "react-router-dom"
 import ItemDetail from "../ItemDetail/ItemDetail"
 
 
-const ItemDetailContainer = ({id}) => {
+const ItemDetailContainer = () => {
     
     const [laptop, setLaptop] = useState(null)
 
+    const { itemId } = useParams()
+    
     useEffect(() => {
         fetch('https://api.mercadolibre.com/sites/MLA/search?q=laptop&sort=sortId')
         .then((response) =>{
             return response.json()
         })
         .then((data) => {
-            setLaptop(data.results)
+            setLaptop(data.results.find((prod) => prod.id === itemId))
         })
-    }, [])
+        .catch(error => console.log(error))
+    }, [itemId])
     
     return (
         <>
@@ -23,7 +27,7 @@ const ItemDetailContainer = ({id}) => {
                 laptop
                 ?
                 <>
-                    <ItemDetail prop={laptop[id]}/>
+                    <ItemDetail prop={laptop}/>
                 </>
                 : null
 

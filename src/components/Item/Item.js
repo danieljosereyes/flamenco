@@ -1,7 +1,7 @@
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom'
 
-const Item = ({title="", img="", }) => {
+const Item = ({title="", img="", id=""}) => {
   
   return (
     <Card style={{ width: '18rem' }}>
@@ -12,7 +12,7 @@ const Item = ({title="", img="", }) => {
           Some quick example text to build on the card title and make up the
           bulk of the card's content.
         </Card.Text>
-        <Button variant="primary">Ver Detalles</Button>
+        <Link to={`/item/${id}`} className="btn btn-primary my-2">Ver Detalles</Link>
       </Card.Body>
     </Card>
   );

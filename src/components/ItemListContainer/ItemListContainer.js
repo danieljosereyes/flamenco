@@ -7,9 +7,8 @@ import { useParams } from 'react-router-dom'
 const ItemListContainer = () => {
     
     const [laptop, setLaptop] = useState(null)
-    console.log(laptop)
+
     const { parametro } = useParams()
-    console.log( parametro )
 
     useEffect(() => {
         fetch('https://api.mercadolibre.com/sites/MLA/search?q=laptop&sort=sortId')
