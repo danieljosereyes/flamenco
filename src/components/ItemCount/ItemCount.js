@@ -1,29 +1,29 @@
-import {useState} from 'react'
-
-function ItemCount ({producto, limite, precio}) {
 
 
-    const [contar, setContar] = useState(1)
+function ItemCount ({cantidad, setCantidad, limite, anadir}) {
 
     const handleSumar = () => {
-      if (contar < limite)
-        setContar (contar + 1)        
+      if (cantidad < limite)
+        setCantidad (cantidad + 1)  
 
     }
     
     const handleRestar = () => {
-        if(contar > 1){    
-            setContar(contar - 1)
+        if(cantidad > limite){    
+            setCantidad(cantidad - 1)
         }
     }
+    
     return (        
         <article className="productos">
-            <h3> { producto }</h3>
-            <p>Precio { precio }</p>
-            <p> Stock { limite } </p>
             <button onClick={handleSumar}>+</button>
-            <p> {contar} </p>
+            <span> {cantidad} </span>
             <button onClick={handleRestar}>-</button>
+            <button 
+            onClick={anadir}
+            className="button">
+                Añadir al Carrito
+            </button>
         </article>
     )
 }
