@@ -7,6 +7,7 @@ const CartWidget = () => {
             <Link to={'/pasillo/EXO'}>EXO</Link>
             <Link to={'/pasillo/HP'}>HP</Link>
             <Link to={'/pasillo/Dell'}>DELL</Link>
+            <Link to={'/cart'}>CARRITO</Link>
         </nav>
     )
 }

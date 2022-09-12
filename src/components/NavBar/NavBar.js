@@ -6,8 +6,6 @@ const NavBar = () => {
         <header className='header'>
             <Link to={'/'} className="title">Flamenco</Link> 
 
-
-
             <CartWidget/>
         </header>
     )
