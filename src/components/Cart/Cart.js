@@ -4,8 +4,8 @@ import CartItem from "../CartItem/CartItem"
 
 
 const Cart = () => {
-    const { carrito } = useContext(CartContext)
-    console.log(carrito)
+    const { carrito, vaciarCarrito } = useContext(CartContext)
+    
     return(
         <div>
             <h2>Carrito de Compras</h2>
@@ -15,6 +15,7 @@ const Cart = () => {
                     <CartItem item={item}/>
                 </div>
             ))}
+            <button onClick={vaciarCarrito}>Vaciar Carrito</button>
         </div>
     )
 }
