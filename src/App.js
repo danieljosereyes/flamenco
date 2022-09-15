@@ -11,11 +11,31 @@ import {
   Navigate,
 } from "react-router-dom";
 import Cart from './components/Cart/Cart';
+import { CartContext } from './context/CartContext.js'
+import { useState } from 'react'
+
 function App() {
+
+  const [carrito, setCarrito] = useState([])
+
+  const agregarAlCarrito = (item) => {
+    setCarrito( [...carrito, item] )
+  }
+
+  const cargaDelCarrito = (id) => {
+    return carrito.some((item) => item.id === id)
+  }
+
   return (
     <div>
-      <BrowserRouter>
-        
+      <CartContext.Provider  value={ {
+        carrito, 
+        agregarAlCarrito,
+        cargaDelCarrito
+    } 
+        }>
+
+      <BrowserRouter>        
         <NavBar/>
         <Routes>
           <Route path='/' element={ <ItemListContainer/> } />
@@ -24,10 +44,8 @@ function App() {
           <Route path='/cart' element={ <Cart/> } />
           <Route path="*" element={ <Navigate to="/"/>} />
         </Routes>
-
-          
-
       </BrowserRouter>
+      </CartContext.Provider>
     </div>
   );
 }

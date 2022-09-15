@@ -3,13 +3,13 @@
 function ItemCount ({cantidad, setCantidad, limite, anadir}) {
 
     const handleSumar = () => {
-      if (cantidad < limite)
+      if (cantidad < limite){
         setCantidad (cantidad + 1)  
-
+        }
     }
     
     const handleRestar = () => {
-        if(cantidad > limite){    
+        if (cantidad > limite){    
             setCantidad(cantidad - 1)
         }
     }
