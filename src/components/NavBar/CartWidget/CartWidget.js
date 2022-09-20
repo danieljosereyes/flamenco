@@ -5,11 +5,11 @@ import "./CartWidget.scss"
 
 const CartWidget = () => {
     
-    const {carrito} = useContext(CartContext)
-
+    const { carrito } = useContext(CartContext)
+console.log(carrito)
     return(
         <> 
-            <Link to="/cart" className={`widget ${ carrito.lenght > 0 ? 'widget_visible' : '' }`}>
+            <Link to="/cart" className={`widget ${carrito.lenght > 0 ? ' widget_visible ' : ' ' }`}>
                 Carrito
             </Link>
         </>
