@@ -6,16 +6,13 @@ import { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
 import { Link } from 'react-router-dom'
 
-const ItemDetail = ({prop}) => {
+const ItemDetail = ({ id, title, price, thumbnail, thumbnail_id, order_backend }) => {
 
     const {carrito, agregarAlCarrito, cargaDelCarrito} = useContext(CartContext)
 
     console.log(carrito)
-    const {id, title, price, thumbnail, thumbnail_id, order_backend} = prop
-
+    
     const [contar, setContar] = useState(1)
-
-
 
     const handleAnadirCarrito = () => {
         const itemCarrito = {
@@ -24,7 +21,6 @@ const ItemDetail = ({prop}) => {
             precio: price,
             cantidad: contar
         }
-        console.log(cargaDelCarrito(itemCarrito.id))
         agregarAlCarrito(itemCarrito)
     }
     
@@ -36,7 +32,7 @@ const ItemDetail = ({prop}) => {
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum doloribus iure cum, molestiae deleniti doloremque accusantium magnam ipsum assumenda, earum fugiat fugit velit vero quasi nostrum laboriosam expedita odit! Sed?</p>
             {
                 cargaDelCarrito(id)
-                ?    <Link to="/cart">Ir al carrito</Link>
+                ?   <Link to="/cart">Ir al carrito</Link>
                 :   <ItemCount 
                     cantidad={contar} 
                     setCantidad={setContar} 

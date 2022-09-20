@@ -5,8 +5,12 @@ const NavBar = () => {
     return (    
         <header className='header'>
             <Link to={'/'} className="title">Flamenco</Link> 
-
-            <CartWidget/>
+            <nav className="nav">
+                <Link to={'/pasillo/EXO'}>EXO</Link>
+                <Link to={'/pasillo/HP'}>HP</Link>
+                <Link to={'/pasillo/Dell'}>DELL</Link>
+                <CartWidget/>
+            </nav>
         </header>
     )
 }

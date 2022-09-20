@@ -10,3 +10,14 @@
     align-items: center;
   }
 }
+
+.nav {
+  width: 300px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .nav-link {
+      width: 100px;
+  }
+}

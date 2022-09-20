@@ -27,7 +27,7 @@ const ItemDetailContainer = () => {
                 laptop
                 ?
                 <>
-                    <ItemDetail prop={laptop}/>
+                    <ItemDetail id={laptop.id} title={laptop.title} price={laptop.price} thumbnail={laptop.thumbnail} thumbnail_id={laptop.thumbnail_id} order_backend={laptop.order_backend}/>
                 </>
                 : null
 

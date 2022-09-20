@@ -1,4 +1,4 @@
-
+import { Button } from "@mui/material"
 
 function ItemCount ({cantidad, setCantidad, limite, anadir}) {
 
@@ -9,21 +9,36 @@ function ItemCount ({cantidad, setCantidad, limite, anadir}) {
     }
     
     const handleRestar = () => {
-        if (cantidad > limite){    
-            setCantidad(cantidad - 1)
+        if (cantidad > 0){
+            setCantidad (cantidad - 1)  
+            }
         }
-    }
     
     return (        
         <article className="productos">
-            <button onClick={handleSumar}>+</button>
-            <span> {cantidad} </span>
-            <button onClick={handleRestar}>-</button>
-            <button 
+            
+            <Button 
+            color={ cantidad === 0 ? "success" : "error"}
+            disabled={ cantidad === 0 }
+            onClick={ handleRestar }
+            >
+                -
+            </Button>
+            <span> { cantidad } </span>
+            <Button 
+            onClick={ handleSumar }
+            >
+                +
+            </Button>
+            
+            <Button 
+            variant="contained"
+            color="success"
             onClick={anadir}
-            className="button">
+            disabled={ cantidad === 0 }
+            >
                 Añadir al Carrito
-            </button>
+            </Button>
         </article>
     )
 }

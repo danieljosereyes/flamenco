@@ -2,11 +2,13 @@ import { useEffect,useState } from "react"
 import ItemList from "../ItemList/ItemList"
 import"./ItemListContainer.scss"
 import { useParams } from 'react-router-dom'
+import Loader from "../Loader/Loader"
 
 
 const ItemListContainer = () => {
     
     const [laptop, setLaptop] = useState(null)
+    console.log(laptop)
 
     const { parametro } = useParams()
 
@@ -28,15 +30,14 @@ const ItemListContainer = () => {
     
     return (
         <>
-            
-            <h2>Productos</h2>
+            <h2>Pasillo</h2>
             {
                 laptop
                 ?
                 <div className="ItemListContainer">
                     <ItemList laptop={laptop}/>
                 </div>
-                : null
+                : <Loader/>
             }
 
         </>

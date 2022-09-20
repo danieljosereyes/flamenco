@@ -1,14 +1,19 @@
+import { useContext } from "react"
+import { Link } from "react-router-dom"
+import { CartContext } from "../../../context/CartContext"
 import "./CartWidget.scss"
-import { Link } from 'react-router-dom'
 
 const CartWidget = () => {
+    
+    const {carrito} = useContext(CartContext)
+
     return(
-        <nav className="nav">
-            <Link to={'/pasillo/EXO'}>EXO</Link>
-            <Link to={'/pasillo/HP'}>HP</Link>
-            <Link to={'/pasillo/Dell'}>DELL</Link>
-            <Link to={'/cart'}>CARRITO</Link>
-        </nav>
+        <> 
+            <Link to="/cart" className={`widget ${ carrito.lenght > 0 ? 'widget_visible' : '' }`}>
+                Carrito
+            </Link>
+        </>
     )
-}
+}  
+
 export default CartWidget
