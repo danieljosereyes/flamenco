@@ -3,39 +3,41 @@ import ItemList from "../ItemList/ItemList"
 import"./ItemListContainer.scss"
 import { useParams } from 'react-router-dom'
 import Loader from "../Loader/Loader"
+import { db } from "../../firebase/config"
+import { collection, getDocs } from "firebase/firestore"
 
 
 const ItemListContainer = () => {
     
-    const [laptop, setLaptop] = useState(null)
-    console.log(laptop)
+    const [product, setProduct] = useState(null)
+    console.log(product)
+    const [loading, setLoading] = useState(true)
 
     const { parametro } = useParams()
 
     useEffect(() => {
-        fetch('https://api.mercadolibre.com/sites/MLA/search?q=laptop&sort=sortId')
-        .then((response) =>{
-            return response.json()
-        })
+        const productRef = collection(db, 'despensa')
 
-        .then((data) => {
-            if(!parametro){
-                setLaptop(data.results)
-            }  else {
-                setLaptop(data.results.filter ((prod) => prod.attributes[0].value_name === parametro))
-            }             
-        })
-        .catch(error => console.log(error))
+        getDocs(productRef)
+        setLoading(true)
+            .then((resp) => {
+                const productDB = resp.docs.map( (doc) => ({id: doc.id ,...doc.data()}) )
+                console.log(productDB)
+                setProduct(productDB)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }, [parametro])
     
     return (
         <>
             <h2>Pasillo</h2>
             {
-                laptop
+                product
                 ?
                 <div className="ItemListContainer">
-                    <ItemList laptop={laptop}/>
+                    <ItemList product={product}/>
                 </div>
                 : <Loader/>
             }
