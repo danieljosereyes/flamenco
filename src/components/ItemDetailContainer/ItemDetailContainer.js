@@ -1,38 +1,42 @@
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import ItemDetail from "../ItemDetail/ItemDetail"
-
+import Loader from "../Loader/Loader"
+import { doc ,getDoc } from "firebase/firestore"
+import { db } from "../../firebase/config"
 
 const ItemDetailContainer = () => {
     
-    const [laptop, setLaptop] = useState(null)
-
-    const { itemId } = useParams()
+    const [item, setItem] = useState(null)
+    const [loading, setLoading] = useState(true)
+    
+    const {itemId} = useParams()
     
     useEffect(() => {
-        fetch('https://api.mercadolibre.com/sites/MLA/search?q=laptop&sort=sortId')
-        .then((response) =>{
-            return response.json()
-        })
-        .then((data) => {
-            setLaptop(data.results.find((prod) => prod.id === itemId))
-        })
-        .catch(error => console.log(error))
+        setLoading(true)
+        
+
+        const docRef = doc(db, 'despensa', itemId)
+
+        getDoc(docRef)
+            .then((doc) => {
+                setItem({id:doc.id ,...doc.data()})
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }, [itemId])
     
     return (
-        <>
+        <div>
             <h2>Producto</h2>
             {
-                laptop
-                ?
-                <>
-                    <ItemDetail id={laptop.id} title={laptop.title} price={laptop.price} thumbnail={laptop.thumbnail} thumbnail_id={laptop.thumbnail_id} order_backend={laptop.order_backend}/>
-                </>
-                : null
-
+                loading
+                ?   <Loader/>
+                :   <ItemDetail id={item.id} title={item.nombre} price={item.precio} />
+                
             }
-        </>
+        </div>
     )
 }
 

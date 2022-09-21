@@ -16,10 +16,10 @@ const ItemListContainer = () => {
     const { parametro } = useParams()
 
     useEffect(() => {
+        setLoading(true)
         const productRef = collection(db, 'despensa')
 
         getDocs(productRef)
-        setLoading(true)
             .then((resp) => {
                 const productDB = resp.docs.map( (doc) => ({id: doc.id ,...doc.data()}) )
                 console.log(productDB)
@@ -34,12 +34,11 @@ const ItemListContainer = () => {
         <>
             <h2>Pasillo</h2>
             {
-                product
-                ?
-                <div className="ItemListContainer">
-                    <ItemList product={product}/>
-                </div>
-                : <Loader/>
+                loading
+                ?   <Loader/>
+                :   <div className="ItemListContainer">
+                        <ItemList product={product}/>
+                    </div>
             }
 
         </>
