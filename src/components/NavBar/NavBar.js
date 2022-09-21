@@ -6,9 +6,9 @@ const NavBar = () => {
         <header className='header'>
             <Link to={'/'} className="title">Flamenco</Link> 
             <nav className="nav">
-                <Link to={'/pasillo/EXO'}>EXO</Link>
-                <Link to={'/pasillo/HP'}>HP</Link>
-                <Link to={'/pasillo/Dell'}>DELL</Link>
+                <Link to={'/pasillo/frutasverduras'}>Frutas Verduras</Link>
+                <Link to={'/pasillo/despensa'}>Despensa</Link>
+                <Link to={'/pasillo/quesoslacteos'}>Lacteos</Link>
                 <CartWidget/>
             </nav>
         </header>

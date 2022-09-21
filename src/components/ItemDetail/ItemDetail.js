@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
 import { Link } from 'react-router-dom'
 
-const ItemDetail = ({ id, title, price, thumbnail, thumbnail_id, order_backend }) => {
+const ItemDetail = ({ id, title, price, thumbnail, thumbnail_id, amount, description}) => {
 
     const {carrito, agregarAlCarrito, cargaDelCarrito} = useContext(CartContext)
 
@@ -29,14 +29,14 @@ const ItemDetail = ({ id, title, price, thumbnail, thumbnail_id, order_backend }
             <h3>{title}</h3>
             <p>$ {price}</p>
             <img src={thumbnail} alt={thumbnail_id}/>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum doloribus iure cum, molestiae deleniti doloremque accusantium magnam ipsum assumenda, earum fugiat fugit velit vero quasi nostrum laboriosam expedita odit! Sed?</p>
+            <p>{description}</p>
             {
                 cargaDelCarrito(id)
                 ?   <Link to="/cart">Ir al carrito</Link>
                 :   <ItemCount 
                     cantidad={contar} 
                     setCantidad={setContar} 
-                    limite={order_backend}
+                    limite={amount}
                     anadir={handleAnadirCarrito}
                 />
             }

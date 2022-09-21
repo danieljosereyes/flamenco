@@ -4,7 +4,7 @@ import"./ItemListContainer.scss"
 import { useParams } from 'react-router-dom'
 import Loader from "../Loader/Loader"
 import { db } from "../../firebase/config"
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, query, where } from "firebase/firestore"
 
 
 const ItemListContainer = () => {
@@ -17,9 +17,13 @@ const ItemListContainer = () => {
 
     useEffect(() => {
         setLoading(true)
+        
         const productRef = collection(db, 'despensa')
+        const q = parametro 
+                    ? query(productRef, where('category', '==', parametro))
+                    : productRef 
 
-        getDocs(productRef)
+        getDocs(q)
             .then((resp) => {
                 const productDB = resp.docs.map( (doc) => ({id: doc.id ,...doc.data()}) )
                 console.log(productDB)

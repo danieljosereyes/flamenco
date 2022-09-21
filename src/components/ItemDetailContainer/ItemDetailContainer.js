@@ -33,7 +33,7 @@ const ItemDetailContainer = () => {
             {
                 loading
                 ?   <Loader/>
-                :   <ItemDetail id={item.id} title={item.nombre} price={item.precio} />
+                :   <ItemDetail id={item.id} title={item.name} price={item.price} amount={item.amount} description={item.description}  />
                 
             }
         </div>
