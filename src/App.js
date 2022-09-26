@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import Cart from './components/Cart/Cart';
 import { CartProvider } from './context/CartContext.js'
+import Checkout from './components/Checkout/Checkout';
  
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
   return (
     <div>
       <CartProvider>
-
+        
       <BrowserRouter>        
         <NavBar/>
         <Routes>
@@ -28,6 +29,7 @@ function App() {
           <Route path='/pasillo/:parametro' element={ <ItemListContainer/> }/>
           <Route path='/item/:itemId' element={ <ItemDetailContainer/> }/>
           <Route path='/cart' element={ <Cart/> } />
+          <Route path='/Checkout' element={ <Checkout/> } />
           <Route path="*" element={ <Navigate to="/"/>} />
         </Routes>
       </BrowserRouter>
