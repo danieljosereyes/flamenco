@@ -1,7 +1,15 @@
 import { useState } from "react"
-
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
+import { Navigate } from "react-router-dom"
+import { addDoc, collection } from "firebase/firestore"
+import { db } from "../../firebase/config"
 
 const Checkout = () => {
+
+    const { carrito, precioTotal, buyFinish } = useContext(CartContext)
+
+    const [orderId, setOrderId] = useState(null)
 
     const [values, setValues] = useState({
         nombre: '',
@@ -19,7 +27,9 @@ const Checkout = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const orden = {
-            comprador: values
+            comprador: values,
+            items: carrito,
+            total: precioTotal()
         }
 
         if (values.nombre.length < 2){
@@ -29,11 +39,28 @@ const Checkout = () => {
             alert("Email Incorrecto")
         }
         
-        console.log('submit del form')
-        console.log(orden)
+        const orderRef = collection(db,'ordenes')
+        addDoc(orderRef, orden)
+            .then((doc) => {
+                console.log(doc.id)
+                setOrderId(doc.id)
+                buyFinish()
+            })
+    }
+
+    if (orderId) {
+        return (
+            <div>
+                <h2>Lista de ordenes</h2>
+                <hr/>
+                <p>Tu numero de orden es: <strong>{orderId}</strong></p>
+            </div>
+        )
     }
         
-    
+    if (carrito.length === 0) {
+        return <Navigate to="/"/>
+    }
 
     return (
         <div>
@@ -41,7 +68,7 @@ const Checkout = () => {
             <hr/>
 
             <form onSubmit={handleSubmit}>
-                <input name="name" onChange={handleImputChange} value={values.name} type={'text'} placeholder="Tu nombre"/>
+                <input name="nombre" onChange={handleImputChange} value={values.name} type={'text'} placeholder="Tu nombre"/>
                 <input name="email" onChange={handleImputChange} value={values.email} type={'email'} placeholder="Email"/>
                 <input name="direction" onChange={handleImputChange} value={values.direction} type={'text'} placeholder="Direccion"/>
                 <button type="submit">Enviar</button>
